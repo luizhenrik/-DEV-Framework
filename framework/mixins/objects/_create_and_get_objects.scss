@@ -35,9 +35,9 @@ $objectGlobal: ();
 
 // Está função serve para colocar os valores de items em propriedades do css
 // exemplo:
-// .element{color: object-get(nomeDoObjeto, color);}
+// .element{color: object-get(nomeDoObjeto, objetoItemNome);}
 // depois de compilado
-// .element{color: red;}
+// .element{color: objetoItemValor;}
 @function object-get($objectName, $objectItemsName) {
     @if (map-has-key($objectGlobal, $objectName)) {
         $props: map-get($objectGlobal, $objectName);
@@ -54,7 +54,7 @@ $objectGlobal: ();
 // Está função serve para colocar os valores de items em todo o elemento css exemplo: 
 // .element {@include object-get(nomeDoObjeto);}
 // depois de compilado 
-// .element {prop: value; prop: value;}
+// .element {prop: objetoItemValor; prop: objetoItemValor2; ...}
 @mixin object-get($objectName) {
     @if (map-has-key($objectGlobal, $objectName)) {
         $props: map-get($objectGlobal, $objectName);
