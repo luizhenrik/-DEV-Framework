@@ -1,0 +1,13 @@
+// Adds Children to Parent
+@mixin bemChildren($children) {
+    &__#{$children} {
+        @content;
+    }
+}
+
+// Adds Modifier to Element
+@mixin bemModifier($modifier) {
+    &--#{$modifier} {
+        @content;
+    }
+}

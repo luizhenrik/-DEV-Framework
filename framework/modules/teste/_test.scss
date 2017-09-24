@@ -1,0 +1,10 @@
+@warn object-get(titleSize, h1);
+h1 {
+    font-size: object-get(titleSize, h1);
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: object-get(titleSize, h3);
+    }
+}

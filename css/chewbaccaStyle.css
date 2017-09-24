@@ -1,0 +1,8 @@
+/* line 2, framework/modules/teste/_test.scss */
+h1 {
+  font-size: 25px; }
+
+@media screen and (max-width: 768px) {
+  /* line 7, framework/modules/teste/_test.scss */
+  h1 {
+    font-size: 18px; } }

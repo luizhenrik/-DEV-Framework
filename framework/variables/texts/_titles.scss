@@ -1,0 +1,2 @@
+$titles: ( h1: 25px, h2: 20px, h3: 18px);
+@include object-set(titleSize, $titles);

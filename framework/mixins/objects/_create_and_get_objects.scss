@@ -1,0 +1,66 @@
+// Variavel virtual para criação dos objetos
+$objectGlobal: ();
+// Está função da um merge de objetos
+@mixin define-object($define_objectName, $define_objectItemsName, $define_objectItemsValue:false) {
+    $props: ();
+    @if($define_objectItemsValue==false) {
+        @each $name,
+        $value in $define_objectItemsName {
+            $props: map-merge($props, ( $name: $value));
+        }
+        $objectGlobal: map-merge($objectGlobal, ( $define_objectName: $props)) !global;
+    }
+    @else {
+        @if(map-has-key($objectGlobal, $define_objectName)) {
+            $props: map-get($objectGlobal, $define_objectName);
+        }
+        $props: map-merge($props, ( $define_objectItemsName: $define_objectItemsValue));
+        $objectGlobal: map-merge($objectGlobal, ( $define_objectName: $props)) !global;
+    }
+}
+
+// Está função é para criar Objects
+// Exemplo para criar um objeto direto: 
+// @include object-set(nomeDoObjeto, ItemDoObjeto, ValorItemDoObjeto);
+// ou se quiser passar varios items é só utilizar
+// @include object-set(nomeDoObjeto, (ItemDoObjeto: ValorItemDoObjeto, ItemDoObjeto: ValorItemDoObjeto));
+@mixin object-set($set_objectName, $set_objectItemsName, $set_objectItemsValue: false) {
+    @if (type-of($set_objectItemsName)==map) {
+        @include define-object($set_objectName, $set_objectItemsName, false);
+    }
+    @else {
+        @include define-object($set_objectName, $set_objectItemsName, $set_objectItemsValue);
+    }
+}
+
+// Está função serve para colocar os valores de items em propriedades do css
+// exemplo:
+// .element{color: object-get(nomeDoObjeto, color);}
+// depois de compilado
+// .element{color: red;}
+@function object-get($objectName, $objectItemsName) {
+    @if (map-has-key($objectGlobal, $objectName)) {
+        $props: map-get($objectGlobal, $objectName);
+        @if (map-has-key($props, $objectItemsName)) {
+            @return map-get($props, $objectItemsName);
+        }
+    }
+    @else {
+        @error 'O objeto que está querendo pegar falta ser criado com a função object-set()';
+    }
+    @return false;
+}
+
+// Está função serve para colocar os valores de items em todo o elemento css exemplo: 
+// .element {@include object-get(nomeDoObjeto);}
+// depois de compilado 
+// .element {prop: value; prop: value;}
+@mixin object-get($objectName) {
+    @if (map-has-key($objectGlobal, $objectName)) {
+        $props: map-get($objectGlobal, $objectName);
+        @each $property,
+        $value in $props {
+            #{$property}: $value;
+        }
+    }
+}
