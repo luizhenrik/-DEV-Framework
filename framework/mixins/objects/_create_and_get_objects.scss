@@ -65,17 +65,25 @@ $objectGlobal: ();
             }
         }
         @else {
+            $i: 1;
             @each $property,
             $value in $props {
+                $isnotexists: false;
+                $existReplace: false;
                 @if(map-has-key($edit, $property)==false) {
-                    @warn "props_default=> #{$property}:#{$value}";
+                    $isnotexists: true;
                     #{$property}: $value;
                 }
-            }
-            @each $property_edit,
-            $value_edit in $edit {
-                @warn "edit=> #{$property_edit}:#{$value_edit}";
-                #{$property_edit}: $value_edit;
+                @if($isnotexists==false) {
+                    @if(map-has-key($edit, $property)) {
+                        #{$property}: map-get($edit, $property);
+                        $existReplace: true;
+                    }
+                }
+                @if($existReplace==false) {
+                    #{nth(map-keys($edit), $i)}: map-get($edit, nth(map-keys($edit), $i));
+                }
+                $i: $i+1;
             }
         }
     }

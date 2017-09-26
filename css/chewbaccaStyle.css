@@ -4,9 +4,9 @@ h1 {
 
 /* line 5, framework/modules/teste/_test.scss */
 p {
-  background-color: orange;
-  color: black;
   font-size: 14px;
+  color: black;
+  background-color: orange;
   font-style: italic; }
 
 /* line 9, framework/modules/teste/_test.scss */
