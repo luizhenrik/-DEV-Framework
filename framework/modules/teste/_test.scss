@@ -1,6 +1,13 @@
-@warn object-get(titleSize, h1);
 h1 {
     font-size: object-get(titleSize, h1);
+}
+
+p {
+    @include object-get(defaults, (color: black, font-size:14px, font-style: italic));
+}
+
+span {
+    @include object-get(defaults);
 }
 
 @media screen and (max-width: 768px) {

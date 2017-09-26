@@ -1,8 +1,21 @@
-/* line 2, framework/modules/teste/_test.scss */
+/* line 1, framework/modules/teste/_test.scss */
 h1 {
   font-size: 25px; }
 
+/* line 5, framework/modules/teste/_test.scss */
+p {
+  background-color: orange;
+  color: black;
+  font-size: 14px;
+  font-style: italic; }
+
+/* line 9, framework/modules/teste/_test.scss */
+span {
+  font-size: 12px;
+  color: red;
+  background-color: orange; }
+
 @media screen and (max-width: 768px) {
-  /* line 7, framework/modules/teste/_test.scss */
+  /* line 14, framework/modules/teste/_test.scss */
   h1 {
     font-size: 18px; } }

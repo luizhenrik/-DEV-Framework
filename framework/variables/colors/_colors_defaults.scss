@@ -1,0 +1,2 @@
+$default: (font-size: 12px, color: red, background-color: orange);
+@include object-set(defaults, $default);

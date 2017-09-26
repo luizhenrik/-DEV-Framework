@@ -55,12 +55,28 @@ $objectGlobal: ();
 // .element {@include object-get(nomeDoObjeto);}
 // depois de compilado 
 // .element {prop: objetoItemValor; prop: objetoItemValor2; ...}
-@mixin object-get($objectName) {
+@mixin object-get($objectName, $edit:false) {
     @if (map-has-key($objectGlobal, $objectName)) {
         $props: map-get($objectGlobal, $objectName);
-        @each $property,
-        $value in $props {
-            #{$property}: $value;
+        @if($edit==false) {
+            @each $property,
+            $value in $props {
+                #{$property}: $value;
+            }
+        }
+        @else {
+            @each $property,
+            $value in $props {
+                @if(map-has-key($edit, $property)==false) {
+                    @warn "props_default=> #{$property}:#{$value}";
+                    #{$property}: $value;
+                }
+            }
+            @each $property_edit,
+            $value_edit in $edit {
+                @warn "edit=> #{$property_edit}:#{$value_edit}";
+                #{$property_edit}: $value_edit;
+            }
         }
     }
 }
