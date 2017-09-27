@@ -46,7 +46,7 @@ $objectGlobal: ();
         }
     }
     @else {
-        @error 'O objeto que está querendo pegar falta ser criado com a função object-set()';
+        @error O objeto que está querendo pegar falta ser criado com a função object-set();
     }
     @return false;
 }
