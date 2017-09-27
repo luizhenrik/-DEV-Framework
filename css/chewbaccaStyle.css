@@ -15,7 +15,11 @@ span {
   color: red;
   background-color: orange; }
 
+/* line 13, framework/modules/teste/_test.scss */
+h2 {
+  background-color: #0a0000; }
+
 @media screen and (max-width: 768px) {
-  /* line 14, framework/modules/teste/_test.scss */
+  /* line 18, framework/modules/teste/_test.scss */
   h1 {
     font-size: 18px; } }

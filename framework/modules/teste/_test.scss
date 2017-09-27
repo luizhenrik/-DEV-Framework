@@ -10,6 +10,10 @@ span {
     @include object-get(defaults);
 }
 
+h2 {
+    background-color: hsla_generator(#FF0000, 2%, false);
+}
+
 @media screen and (max-width: 768px) {
     h1 {
         font-size: object-get(titleSize, h3);

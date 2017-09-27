@@ -1,0 +1,10 @@
+@function hsla_generator($hexadecimal, $lightness:false, $alpha:false) {
+    @if($lightness==false) {
+        $lightness: lightness($hexadecimal);
+    }
+    @if($alpha==false) {
+        $alpha: 1;
+    }
+    $generate: hsla(hue($hexadecimal), saturation($hexadecimal), $lightness, $alpha);
+    @return $generate;
+}
