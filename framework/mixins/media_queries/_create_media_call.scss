@@ -1,0 +1,67 @@
+// (String)$operator: screen, print e etc..
+// (number)$min: 768px
+// (number)$max: 768px
+@mixin media-query($operator, $min:false, $max:false) {
+    $chkError: false;
+    $minValue: false;
+    $maxValue: false;
+    @if((type-of($max)==bool or $max==0) and (type-of($min)==bool or $min==0)) {
+        @warn "Deve-se setar pelo menos um valor de minimo ou maximo. $min: #{$min} $max: #{$max} em media-query";
+        $chkError: true;
+    }
+    @else if(type-of($min)==bool) {
+        //@warn "bool $min: #{$min}";
+        $minValue: false;
+    }
+    @else if(type-of($max)==bool) {
+        //@warn "bool $max: #{$max}";
+        $maxValue: false;
+    }
+    @else if($min==0) {
+        //@warn "$min é igual a 0 ";
+        $minValue: false;
+    }
+    @else if($max==0) {
+        //@warn "$max é igual a 0 ";
+        $maxValue: false;
+    }
+    @if(type-of($min)==number or type-of($min)==string) {
+        //@warn "$min tipo: #{type-of($min)}";
+        $minValue: true;
+    }
+    @if(type-of($max)==number or type-of($max)==string) {
+        //@warn "$max tipo: #{type-of($max)}";
+        $maxValue: true;
+    }
+    @if($minValue or $maxValue) {
+        @if($chkError==false) {
+            @if($minValue and $maxValue==false) {
+                //@warn min;
+                @media #{$operator} and (min-width: $min) {
+                    @content;
+                }
+            }
+            @else if($maxValue and $minValue==false) {
+                //@warn max;
+                @media #{$operator} and (max-width: $max) {
+                    @content;
+                }
+            }
+            @else {
+                //@warn min e max;
+                @media #{$operator} and (min-width: $min) and (max-width: $max - 1) {
+                    @content;
+                }
+            }
+        }
+    }
+}
+
+//Retorna uma media query para o elemento em si
+// (String)$operator: screen, print e etc..
+// (number)$break: 768px
+@mixin respond-to($operator, $break) {
+    @media #{$operator} and (min-width: $break) {
+        @content;
+    }
+}

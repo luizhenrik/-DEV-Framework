@@ -1,25 +1,33 @@
-/* line 1, framework/modules/teste/_test.scss */
 h1 {
-  font-size: 25px; }
+  font-size: 25px;
+}
 
-/* line 5, framework/modules/teste/_test.scss */
+@media screen and (min-width: 1024px) {
+  h1 {
+    color: yellow;
+  }
+}
+
 p {
   font-size: 14px;
   color: black;
   background-color: orange;
-  font-style: italic; }
+  font-style: italic;
+}
 
-/* line 9, framework/modules/teste/_test.scss */
 span {
   font-size: 12px;
   color: red;
-  background-color: orange; }
+  background-color: orange;
+}
 
-/* line 13, framework/modules/teste/_test.scss */
 h2 {
-  background-color: #0a0000; }
+  background-color: #0a0000;
+}
 
-@media screen and (max-width: 768px) {
-  /* line 18, framework/modules/teste/_test.scss */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
   h1 {
-    font-size: 18px; } }
+    font-size: 18px;
+    color: red;
+  }
+}

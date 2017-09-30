@@ -7,8 +7,9 @@ gulp.task('sass', function () {
         .src('./framework/**/*.scss')
         .pipe(globally())
         .pipe(sass({
-            sourceComments: true,
-            errLogToConsole: true
+            sourceComments: false,
+            errLogToConsole: true,
+            outputStyle: 'expanded'
         }).on('error', sass.logError))
         .pipe(gulp.dest('./css'));
 });

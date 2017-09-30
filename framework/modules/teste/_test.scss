@@ -1,5 +1,8 @@
 h1 {
     font-size: object-get(titleSize, h1);
+    @include respond-to(screen, 1024px) {
+        color: yellow;
+    }
 }
 
 p {
@@ -14,8 +17,9 @@ h2 {
     background-color: hsla_generator(#FF0000, 2%, false);
 }
 
-@media screen and (max-width: 768px) {
+@include media-query(screen, 768px, 1200px) {
     h1 {
         font-size: object-get(titleSize, h3);
+        color: red;
     }
 }
