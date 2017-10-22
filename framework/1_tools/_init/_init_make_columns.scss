@@ -1,0 +1,9 @@
+@mixin init_make_columns($breakpoints, $columns) {
+    @each $breakpoint,
+    $width in $breakpoints {
+        @include make-columns-default($breakpoint, $columns);
+        @media (min-width: $width) {
+            @include make-column($breakpoint, $columns);
+        }
+    }
+}

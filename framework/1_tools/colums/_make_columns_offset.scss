@@ -1,0 +1,7 @@
+@mixin make-columns-offset($columns) {
+    @for $number from 1 through $columns {
+        @include bemModifier(false, offset-#{$number}) {
+            margin-left: (100 / $columns * $number)#{'%'};
+        }
+    }
+}

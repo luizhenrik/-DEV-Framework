@@ -1,0 +1,8 @@
+@mixin make-columns-index($columns) {
+    @for $number from 1 through $columns {
+        @include bemModifier(false, #{$number}) {
+            width: (100 / $columns * $number)#{'%'};
+            flex: none;
+        }
+    }
+}

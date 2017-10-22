@@ -1,0 +1,6 @@
+@mixin make-column($breakpoint, $columns) {
+    .col-#{$breakpoint} {
+        @include make-columns-index($columns);
+        @include make-columns-offset($columns)
+    }
+}

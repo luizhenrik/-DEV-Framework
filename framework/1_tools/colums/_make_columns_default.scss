@@ -1,0 +1,17 @@
+@mixin make-columns-default($breakpoint, $columns) {
+    .col {
+        @include bemModifier(false, no-gutters) {
+            @extend %no-gutters;
+        }
+    }
+    .col-#{$breakpoint} {
+        @include bemModifier(false, no-gutters) {
+            @extend %no-gutters;
+        }
+        @for $number from 1 through $columns {
+            @include bemModifier(false, #{$number}) {
+                @extend %make-columns-default;
+            }
+        }
+    }
+}
