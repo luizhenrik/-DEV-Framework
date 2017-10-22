@@ -1,31 +1,57 @@
+/* line 1, framework/6_components/teste/_test.scss */
 h1 {
   font-size: 25px;
 }
 
 @media screen and (min-width: 1024px) {
+  /* line 1, framework/6_components/teste/_test.scss */
   h1 {
     color: yellow;
   }
 }
 
+/* line 8, framework/6_components/teste/_test.scss */
 p {
   font-size: 14px;
   color: black;
   background-color: orange;
-  font-style: italic;
 }
 
+/* line 12, framework/6_components/teste/_test.scss */
 span {
   font-size: 12px;
   color: red;
   background-color: orange;
 }
 
+/* line 16, framework/6_components/teste/_test.scss */
 h2 {
   background-color: #0a0000;
 }
 
+/* line 20, framework/6_components/teste/_test.scss */
+.component {
+  padding: 2vw;
+}
+
+/* line 22, framework/6_components/teste/_test.scss */
+.component__card {
+  background-color: #FFF;
+}
+
+/* line 25, framework/6_components/teste/_test.scss */
+.component__name {
+  color: #000;
+}
+
+/* line 28, framework/6_components/teste/_test.scss */
+.component__button {
+  background-color: blue;
+  color: #FFF;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
+  /* line 35, framework/6_components/teste/_test.scss */
   h1 {
     font-size: 18px;
     color: red;

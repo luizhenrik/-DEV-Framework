@@ -65,25 +65,20 @@ $objectGlobal: ();
             }
         }
         @else {
-            $i: 1;
             @each $property,
             $value in $props {
                 $isnotexists: false;
-                $existReplace: false;
+                $existReplace: false; // Aqui ele retorna do default os valores que nao vao ser editados
                 @if(map-has-key($edit, $property)==false) {
                     $isnotexists: true;
                     #{$property}: $value;
-                }
+                } // Aqui ele retorna do default os valores que sao iguais e vao ser editados
                 @if($isnotexists==false) {
                     @if(map-has-key($edit, $property)) {
                         #{$property}: map-get($edit, $property);
                         $existReplace: true;
                     }
                 }
-                @if($existReplace==false) {
-                    #{nth(map-keys($edit), $i)}: map-get($edit, nth(map-keys($edit), $i));
-                }
-                $i: $i+1;
             }
         }
     }

@@ -6,7 +6,7 @@ h1 {
 }
 
 p {
-    @include object-get(defaults, (color: black, font-size:14px, font-style: italic));
+    @include object-get(defaults, (color: black, font-size:14px, font-style: italic, font-weight: bold));
 }
 
 span {
@@ -15,6 +15,20 @@ span {
 
 h2 {
     background-color: hsla_generator(#FF0000, 2%, false);
+}
+
+.component {
+    padding: 2vw;
+    &__card {
+        background-color: #FFF;
+    }
+    &__name {
+        color: #000;
+    }
+    &__button {
+        background-color: blue;
+        color: #FFF;
+    }
 }
 
 @include media-query(screen, 768px, 1200px) {
