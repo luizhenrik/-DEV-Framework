@@ -1,39 +1,10 @@
-h1 {
-    font-size: object-get(titleSize, h1);
-    @include respond-to(screen, 1024px) {
-        color: yellow;
-    }
+h1{
+    color: object-get(color_test, true_private);
 }
 
-p {
-    @include object-get(defaults, (color: black, font-size:14px, font-style: italic, font-weight: bold));
-}
-
-span {
-    @include object-get(defaults);
-}
-
-h2 {
-    background-color: hsla_generator(#FF0000, 2%, false);
-}
-
-.component {
-    padding: 2vw;
-    &__card {
-        background-color: #FFF;
-    }
-    &__name {
-        color: #000;
-    }
-    &__button {
-        background-color: blue;
-        color: #FFF;
-    }
-}
-
-@include media-query(screen, 768px, 1200px) {
-    h1 {
-        font-size: object-get(titleSize, h3);
-        color: red;
+@each $name, $value in $test{
+    $name: str-remove-whitespace(to-string($name));
+    .bg-status--#{$name}{
+        color: object-get(color_test, #{$name});
     }
 }

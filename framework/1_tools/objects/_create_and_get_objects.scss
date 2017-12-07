@@ -1,36 +1,15 @@
 // Variavel virtual para criação dos objetos
 $objectGlobal: ();
-// Está função da um merge de objetos
-@mixin define-object($define_objectName, $define_objectItemsName, $define_objectItemsValue:false) {
-    $props: ();
-    @if($define_objectItemsValue==false) {
-        @each $name,
-        $value in $define_objectItemsName {
-            $props: map-merge($props, ( $name: $value));
-        }
-        $objectGlobal: map-merge($objectGlobal, ( $define_objectName: $props)) !global;
-    }
-    @else {
-        @if(map-has-key($objectGlobal, $define_objectName)) {
-            $props: map-get($objectGlobal, $define_objectName);
-        }
-        $props: map-merge($props, ( $define_objectItemsName: $define_objectItemsValue));
-        $objectGlobal: map-merge($objectGlobal, ( $define_objectName: $props)) !global;
-    }
-}
 
 // Está função é para criar Objects
 // Exemplo para criar um objeto direto: 
-// @include object-set(nomeDoObjeto, ItemDoObjeto, ValorItemDoObjeto);
-// ou se quiser passar varios items é só utilizar
-// @include object-set(nomeDoObjeto, (ItemDoObjeto: ValorItemDoObjeto, ItemDoObjeto: ValorItemDoObjeto));
-@mixin object-set($set_objectName, $set_objectItemsName, $set_objectItemsValue: false) {
-    @if (type-of($set_objectItemsName)==map) {
-        @include define-object($set_objectName, $set_objectItemsName, false);
+// @include object-set(key, varObject);
+@mixin object-set($key, $varObject) {
+    $props: ();
+    @each $name, $value in $varObject {
+        $props: map-merge($props, ( str-remove-whitespace(to-string($name)): $value));
     }
-    @else {
-        @include define-object($set_objectName, $set_objectItemsName, $set_objectItemsValue);
-    }
+    $objectGlobal: map-merge($objectGlobal, ( $key: $props)) !global;
 }
 
 // Está função serve para colocar os valores de items em propriedades do css
@@ -38,48 +17,19 @@ $objectGlobal: ();
 // .element{color: object-get(nomeDoObjeto, objetoItemNome);}
 // depois de compilado
 // .element{color: objetoItemValor;}
-@function object-get($objectName, $objectItemsName) {
-    @if (map-has-key($objectGlobal, $objectName)) {
-        $props: map-get($objectGlobal, $objectName);
-        @if (map-has-key($props, $objectItemsName)) {
-            @return map-get($props, $objectItemsName);
+@function object-get($object, $key) {
+    //@warn $object;
+    @if (map-has-key($objectGlobal, $object)) {
+        //@warn map-keys($props);
+        $props: map-get($objectGlobal, $object);
+        @if (map-has-key($props, str-remove-whitespace(to-string($key)))) {
+            @return map-get($props, str-remove-whitespace(to-string($key)));
+        }
+        @else{
+            @debug "A Key: #{$key} no Objeto: #{$object} não foi encontrado";
         }
     }
     @else {
-        @error O objeto que está querendo pegar falta ser criado com a função object-set();
-    }
-    @return false;
-}
-
-// Está função serve para colocar os valores de items em todo o elemento css exemplo: 
-// .element {@include object-get(nomeDoObjeto);}
-// depois de compilado 
-// .element {prop: objetoItemValor; prop: objetoItemValor2; ...}
-@mixin object-get($objectName, $edit:false) {
-    @if (map-has-key($objectGlobal, $objectName)) {
-        $props: map-get($objectGlobal, $objectName);
-        @if($edit==false) {
-            @each $property,
-            $value in $props {
-                #{$property}: $value;
-            }
-        }
-        @else {
-            @each $property,
-            $value in $props {
-                $isnotexists: false;
-                $existReplace: false; // Aqui ele retorna do default os valores que nao vao ser editados
-                @if(map-has-key($edit, $property)==false) {
-                    $isnotexists: true;
-                    #{$property}: $value;
-                } // Aqui ele retorna do default os valores que sao iguais e vao ser editados
-                @if($isnotexists==false) {
-                    @if(map-has-key($edit, $property)) {
-                        #{$property}: map-get($edit, $property);
-                        $existReplace: true;
-                    }
-                }
-            }
-        }
+        @debug "Objeto: #{$object} não foi encontrado";
     }
 }

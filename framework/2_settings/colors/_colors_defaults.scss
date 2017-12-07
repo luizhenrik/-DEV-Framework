@@ -1,2 +1,7 @@
-$default: (font-size: 12px, color: red, background-color: orange);
-@include object-set(defaults, $default);
+$test: (
+    online: #F0E,
+    true_private: #EEE,
+    peek: yellow
+);
+
+@include object-set(color_test, $test);
